@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery List</title>
+    <style>
+        th, td, p, input, h3 {
+            font:15px 'Segoe UI';
+        }
+        table, th, td {
+            border: solid 1px #ddd;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body><center>
+	<h3 >
+    	Click the button to for grocery list
+    </h3>
+    
+        
+    <table  class="table table-dark" id='showData'></table>
+    <input type='button' onclick='tableFromJson()' 
+    	value='Show Data' />
+        <br>
+        
+</center>
+</body>
+
+<script>
+	// scroll down for ES6 features. 
+
+	// using regular methods.
+
+    function tableFromJson() {
+		// the json data. (you can change the values for output.)
+        var myBooks =[
+        {
+          "serialNumber":1,
+          "name":"Rice",
+          "quantity":10,
+          "unit":"Kg",
+          "Department":"Cerials",
+          "Notes":"Red Rice(Matta)"
+          
+        },
+        {
+            "serialNumber":2,
+          "name":"Wheat",
+          "quantity":2,
+          "unit":"Kg",
+          "Department":"Cerials",
+          "Notes":"Ashirvad Atta"
+          
+        },
+        {
+            "serialNumber":3,
+          "name":"Carrot",
+          "quantity":1,
+          "unit":"Kg",
+          "Department":"Vegitables",
+          "Notes":"Fresh"
+          
+        },
+        {
+            "serialNumber":4,
+          "name":"Potato",
+          "quantity":2,
+          "unit":"Kg",
+          "Department":"Vegitables",
+          "Notes":"Baby potatoes"
+        },
+        {
+            "serialNumber":5,
+          "name":"Green peas",
+          "quantity":1,
+          "unit":"Kg",
+          "Department":"Vegitables",
+          "Notes":"Packet"
+        },
+        {
+            "serialNumber":6,
+          "name":"Butter",
+          "quantity":100,
+          "unit":"gm",
+          "Department":"Dairy",
+          "Notes":"Amul"
+        },
+        {
+            "serialNumber":7,
+          "name":"Milk",
+          "quantity":1,
+          "unit":"L",
+          "Department":"Dairy",
+          "Notes":"Milma"
+        },
+        {
+            "serialNumber":8,
+          "name":"Washing powder",
+          "quantity":1,
+          "unit":"Kg",
+          "Department":"Cleansers",
+          "Notes":"Sunlight/Ujala"
+        },
+        {
+            "serialNumber":9,
+          "name":"Masala powder",
+          "quantity":100,
+          "unit":"gm",
+          "Department":"Spices",
+          "Notes":"Aachi/Nirapara for biriyani"
+        },
+        {
+            "serialNumber":10,
+          "name":"Chilly powder",
+          "quantity":200,
+          "unit":"gm",
+          "Department":"Spices",
+          "Notes":"Kashmiri chilli powder if available"
+        }
+    ]
+
+        // Extract value from table header. 
+        // ('Book ID', 'Book Name', 'Category' and 'Price')
+        var col = [];
+        for (var i = 0; i < myBooks.length; i++) {
+            for (var key in myBooks[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        // Create a table.
+        var table = document.createElement("table");
+
+        // Create table header row using the extracted headers above.
+        var tr = table.insertRow(-1);                   // table row.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // table header.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // add json data to the table as rows.
+        for (var i = 0; i < myBooks.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = myBooks[i][col[j]];
+            }
+        }
+
+        // Now, add the newly created table with json data, to a container.
+        var divShowData = document.getElementById('showData');
+        divShowData.innerHTML = "";
+        divShowData.appendChild(table);
+        
+        
+    }
+    
+    
+</script>
+</html>
